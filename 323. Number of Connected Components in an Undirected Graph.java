@@ -60,3 +60,28 @@ class Solution {
         }
     }
 }
+
+
+// UNION FIND ALGORITHM
+
+class Solution {
+    public int countComponents(int n, int[][] edges) {
+        int[] root=new int[n];
+        for(int i=0;i<n;i++) root[i]=i;
+        for(int i=0;i<edges.length;i++){
+            int root1=find(edges[i][0],root);
+            int root2=find(edges[i][1],root);
+            if(root1!=root2){
+                root[root1]=root2;
+                n--;
+            }
+        }
+        return n;
+    }
+    public int find(int id,int[] root){
+        int old=id;
+        while(root[id]!=id) id=root[id];
+        root[old]=id;
+        return id;
+    }
+}
